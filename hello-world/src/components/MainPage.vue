@@ -1,4 +1,6 @@
 <template>
+  <ThemeSwitch />
+  
   <div class="calculator">
     <div class="display">{{ currentOperand }}</div>
     <div class="buttons">
@@ -29,7 +31,12 @@
 </template>
 
 <script>
+import ThemeSwitch from './ThemeSwitch.vue';
+
 export default {
+  components: {
+    ThemeSwitch, 
+  },
   data() {
     return {
       currentOperand: '',
