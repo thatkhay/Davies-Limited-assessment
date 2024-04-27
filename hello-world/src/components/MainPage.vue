@@ -40,9 +40,9 @@ export default {
   },
   methods: {
     appendNumber(number) {
-    if (number === '.' && this.hasDecimal) return; // Prevent multiple decimals
+    if (number === '.' && this.hasDecimal) return; 
     this.currentOperand += number;
-    this.hasDecimal = this.currentOperand.includes('.'); // Update hasDecimal flag
+    this.hasDecimal = this.currentOperand.includes('.'); 
   },
     chooseOperation(op) {
       this.operator = op;
@@ -89,17 +89,24 @@ export default {
         this.currentOperand = this.currentOperand.toString();
       }
     },
-    calculatePercentage() {
-    if (this.currentOperand !== '') {
-      const prev = parseFloat(this.previousOperand);
-      if (!isNaN(prev)) { // Check if previous operand exists and is a number
-        const curr = parseFloat(this.currentOperand);
-        this.currentOperand = (curr / 100 * prev).toString();
-      } else {
-        alert('Error: No base value for percentage calculation');
-      }
+  calculatePercentage() {
+  const curr = parseFloat(this.currentOperand);
+  if (isNaN(curr)) return;
+
+  if (this.operator) { // Percentage of previous operand
+    const prev = parseFloat(this.previousOperand);
+    if (isNaN(prev)) {
+      alert('Error: No base value for percentage calculation');
+      return;
     }
-  },
+    this.currentOperand = (curr / 100 * prev).toString();
+  } else { // Percentage itself (10% key)
+    this.currentOperand = (curr / 100).toString();
+  }
+},
+
+
+
  
   },
 };
