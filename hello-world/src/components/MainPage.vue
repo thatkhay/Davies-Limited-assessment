@@ -2,22 +2,28 @@
   <div class="calculator">
     <div class="display">{{ currentOperand }}</div>
     <div class="buttons">
+      <button @click="clearDisplay">C</button>
+      <button @click="toggleSign" class="toggle-sign">+/-</button>
+      <button @click="calculatePercentage">%</button>
+      <button @click="chooseOperation('/')">/</button>
       <button @click="appendNumber('7')">7</button>
       <button @click="appendNumber('8')">8</button>
       <button @click="appendNumber('9')">9</button>
-      <button @click="chooseOperation('/')">/</button>
+       <button @click="chooseOperation('*')">x</button>
       <button @click="appendNumber('4')">4</button>
       <button @click="appendNumber('5')">5</button>
       <button @click="appendNumber('6')">6</button>
-      <button @click="chooseOperation('*')">*</button>
+       <button @click="chooseOperation('-')">-</button>
       <button @click="appendNumber('1')">1</button>
       <button @click="appendNumber('2')">2</button>
       <button @click="appendNumber('3')">3</button>
-      <button @click="chooseOperation('-')">-</button>
+     <button @click="chooseOperation('+')">+</button>
       <button @click="appendNumber('0')">0</button>
-      <button @click="clearDisplay">C</button>
+        <button @click="appendNumber('.')">.</button>
       <button @click="calculateResult">=</button>
-      <button @click="chooseOperation('+')">+</button>
+     
+
+
     </div>
   </div>
 </template>
@@ -29,12 +35,15 @@ export default {
       currentOperand: '',
       previousOperand: null,
       operator: null,
+      hasDecimal: false,
     };
   },
   methods: {
     appendNumber(number) {
-      this.currentOperand += number;
-    },
+    if (number === '.' && this.hasDecimal) return; // Prevent multiple decimals
+    this.currentOperand += number;
+    this.hasDecimal = this.currentOperand.includes('.'); // Update hasDecimal flag
+  },
     chooseOperation(op) {
       this.operator = op;
       this.previousOperand = this.currentOperand;
@@ -74,6 +83,24 @@ export default {
       this.previousOperand = null;
       this.operator = null;
     },
+    toggleSign() {
+      if (this.currentOperand !== '') {
+        this.currentOperand = parseFloat(this.currentOperand) * -1;
+        this.currentOperand = this.currentOperand.toString();
+      }
+    },
+    calculatePercentage() {
+    if (this.currentOperand !== '') {
+      const prev = parseFloat(this.previousOperand);
+      if (!isNaN(prev)) { // Check if previous operand exists and is a number
+        const curr = parseFloat(this.currentOperand);
+        this.currentOperand = (curr / 100 * prev).toString();
+      } else {
+        alert('Error: No base value for percentage calculation');
+      }
+    }
+  },
+ 
   },
 };
 </script>
@@ -82,33 +109,35 @@ export default {
 .calculator {
   display: flex;
   flex-direction: column;
-  width: 300px;
-  margin: 0 auto;
-  padding: 20px;
+  width: 80%;
   border: 1px solid #ddd;
   border-radius: 5px;
+  padding: 0;
+  margin: 0;
 }
 
 .display {
   font-size: 24px;
   text-align: right;
-  margin-bottom: 10px;
+  padding: 2rem 2rem 1rem 0;
+  height: 1rem;
 }
 
 .buttons {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 5px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+
 }
 
 button {
-  width: calc(25% - 10px);
+  width: 100%;
   padding: 10px;
   font-size: 16px;
-  border: none;
-  border-radius: 3px;
+
+  border: 1px solid black;
   cursor: pointer;
 }
+
 
 button:hover {
   background-color: #eee;
