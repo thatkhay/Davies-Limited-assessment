@@ -38,6 +38,5 @@ Alternatively, you can deploy the calculator to a web hosting service to make it
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
----
 
-Feel free to contribute to this project by adding new features, improving existing ones, or fixing any issues. If you have any questions or suggestions, please open an issue or contact the project maintainers. Happy calculating!
+
