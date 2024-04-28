@@ -34,9 +34,10 @@ To run the calculator locally, follow these steps:
 
 Alternatively, you can deploy the calculator to a web hosting service to make it accessible online.
 
-## License
+### Note: This project utilizes Vue.js version 2.x for front-end development
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+
 
 
 
