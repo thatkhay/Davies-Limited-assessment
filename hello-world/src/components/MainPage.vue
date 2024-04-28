@@ -12,9 +12,9 @@
     <div class="calculator">
       <div class="display">{{ currentOperand }}</div>
       <div class="buttons">
-        <button @click="clearDisplay">C</button>
-        <button @click="toggleSign" class="toggle-sign">+/-</button>
-        <button @click="calculatePercentage">%</button>
+        <button class="sec-button" @click="clearDisplay">C</button>
+        <button  @click="toggleSign" class="toggle-sign sec-button">+/-</button>
+        <button class="sec-button" @click="calculatePercentage">%</button>
         <button class="special-buttons" @click="chooseOperation('/')">/</button>
         <button @click="appendNumber('7')">7</button>
         <button @click="appendNumber('8')">8</button>
@@ -166,12 +166,20 @@ button {
   height: 5rem;
   border: 1px solid rgba(50, 30, 0, 0.8);
   cursor: pointer;
+  background-color: rgba(132, 120, 102, 0.8);
 }
 
+.sec-button{
+  background-color: rgba(91, 72, 51, 0.8);
+}
 
 button:hover {
-  background-color: #eee;
+background-color: rgba(173, 165, 153, 0.8);
 }
+.sec-button:hover{
+  background-color: rgba(173, 165, 153, 0.8);
+}
+
 
 .main-page {
   text-align: center;
@@ -186,6 +194,9 @@ button:hover {
 
 .special-buttons {
   background-color: #ff9f0c;
+}
+.special-buttons:hover{
+  background-color: #cc7f0a;
 }
 .zero-button {
   grid-column: span 2;
@@ -203,7 +214,25 @@ color: #cc0000;
 
 .dark-mode button {
   border: 1px solid rgba(0, 0, 0, 0.5);
+  background-color: rgba(102, 102, 102, 0.5) ;
  
+}
+.dark-mode button:hover{
+  
+  background-color: rgba(153, 153, 153, 0.5) ;
+ 
+}
+.dark-mode .sec-button:hover{
+  
+  background-color: rgba(153, 153, 153, 0.5) ;
+ 
+}
+
+.dark-mode .sec-button{
+  background-color: rgba(51, 51, 51, 0.5);
+}
+.dark-mode .special-buttons:hover{
+  background-color: #a30000;
 }
 
 .dark-mode .display {
