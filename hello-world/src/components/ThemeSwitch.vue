@@ -1,7 +1,7 @@
 <template>
   <div class="theme-switch">
     <label for="theme">Theme:</label>
-    <select id="theme" v-model="theme">
+    <select id="theme" v-model="theme" @change="$emit('theme-changed', theme)">
       <option value="light">Light</option>
       <option value="dark">Dark</option>
     </select>
@@ -14,6 +14,11 @@ export default {
     return {
       theme: 'light', // Set default theme to light
     };
+  },
+  methods: {
+    emitThemeChange() {
+      this.$emit('theme-changed', this.theme);
+    },
   },
 };
 </script>

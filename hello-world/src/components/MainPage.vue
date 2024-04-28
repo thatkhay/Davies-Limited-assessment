@@ -1,56 +1,67 @@
 <template>
-  <ThemeSwitch />
-  
-  <div class="calculator">
-    <div class="display">{{ currentOperand }}</div>
-    <div class="buttons">
-      <button @click="clearDisplay">C</button>
-      <button @click="toggleSign" class="toggle-sign">+/-</button>
-      <button @click="calculatePercentage">%</button>
-      <button @click="chooseOperation('/')">/</button>
-      <button @click="appendNumber('7')">7</button>
-      <button @click="appendNumber('8')">8</button>
-      <button @click="appendNumber('9')">9</button>
-       <button @click="chooseOperation('*')">x</button>
-      <button @click="appendNumber('4')">4</button>
-      <button @click="appendNumber('5')">5</button>
-      <button @click="appendNumber('6')">6</button>
-       <button @click="chooseOperation('-')">-</button>
-      <button @click="appendNumber('1')">1</button>
-      <button @click="appendNumber('2')">2</button>
-      <button @click="appendNumber('3')">3</button>
-     <button @click="chooseOperation('+')">+</button>
-      <button @click="appendNumber('0')">0</button>
-        <button @click="appendNumber('.')">.</button>
-      <button @click="calculateResult">=</button>
-     
+  <div :class="['main-page', { 'dark-mode': isDarkMode }]">
+
+<div class="theme-switch-div">
+    <label class="switch">
+      <input type="checkbox" v-model="isDarkMode">
+      <span class="slider round"></span>
+    </label>
+     <h4> {{ isDarkMode ? 'Theme 2' : 'Theme 1' }} </h4>
+    </div>
+   
+    <div class="calculator">
+      <div class="display">{{ currentOperand }}</div>
+      <div class="buttons">
+        <button @click="clearDisplay">C</button>
+        <button @click="toggleSign" class="toggle-sign">+/-</button>
+        <button @click="calculatePercentage">%</button>
+        <button class="special-buttons" @click="chooseOperation('/')">/</button>
+        <button @click="appendNumber('7')">7</button>
+        <button @click="appendNumber('8')">8</button>
+        <button @click="appendNumber('9')">9</button>
+        <button class="special-buttons" @click="chooseOperation('*')">x</button>
+        <button @click="appendNumber('4')">4</button>
+        <button @click="appendNumber('5')">5</button>
+        <button @click="appendNumber('6')">6</button>
+        <button class="special-buttons" @click="chooseOperation('-')">-</button>
+        <button @click="appendNumber('1')">1</button>
+        <button @click="appendNumber('2')">2</button>
+        <button @click="appendNumber('3')">3</button>
+        <button class="special-buttons" @click="chooseOperation('+')">+</button>
+
+        <button class="zero-button" @click="appendNumber('0')">0</button>
+        <button class="dot-button" @click="appendNumber('.')">.</button>
+        <button class="special-buttons" @click="calculateResult">=</button>
 
 
+
+
+
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import ThemeSwitch from './ThemeSwitch.vue';
+
 
 export default {
-  components: {
-    ThemeSwitch, 
-  },
+
   data() {
     return {
       currentOperand: '',
       previousOperand: null,
       operator: null,
       hasDecimal: false,
+      isDarkMode: false
     };
   },
   methods: {
     appendNumber(number) {
-    if (number === '.' && this.hasDecimal) return; 
-    this.currentOperand += number;
-    this.hasDecimal = this.currentOperand.includes('.'); 
-  },
+      if (number === '.' && this.hasDecimal) return;
+      this.currentOperand += number;
+      this.hasDecimal = this.currentOperand.includes('.');
+    },
     chooseOperation(op) {
       this.operator = op;
       this.previousOperand = this.currentOperand;
@@ -96,25 +107,23 @@ export default {
         this.currentOperand = this.currentOperand.toString();
       }
     },
-  calculatePercentage() {
-  const curr = parseFloat(this.currentOperand);
-  if (isNaN(curr)) return;
+    calculatePercentage() {
+      const curr = parseFloat(this.currentOperand);
+      if (isNaN(curr)) return;
 
-  if (this.operator) { // Percentage of previous operand
-    const prev = parseFloat(this.previousOperand);
-    if (isNaN(prev)) {
-      alert('Error: No base value for percentage calculation');
-      return;
-    }
-    this.currentOperand = (curr / 100 * prev).toString();
-  } else { // Percentage itself (10% key)
-    this.currentOperand = (curr / 100).toString();
-  }
-},
+      if (this.operator) {
+        const prev = parseFloat(this.previousOperand);
+        if (isNaN(prev)) {
+          alert('Error: No base value for percentage calculation');
+          return;
+        }
+        this.currentOperand = (curr / 100 * prev).toString();
+      } else {
+        this.currentOperand = (curr / 100).toString();
+      }
+    },
 
 
-
- 
   },
 };
 </script>
@@ -123,18 +132,25 @@ export default {
 .calculator {
   display: flex;
   flex-direction: column;
-  width: 80%;
-  border: 1px solid #ddd;
+  width: 40%;
+
   border-radius: 5px;
   padding: 0;
   margin: 0;
-}
 
+
+
+}
+h4{
+  color: #ff9f0c;
+  font-size: 1.5rem
+}
 .display {
-  font-size: 24px;
+  font-size: 34px;
   text-align: right;
-  padding: 2rem 2rem 1rem 0;
+  padding: 2rem 2rem 1.5rem 0;
   height: 1rem;
+  background-color: rgba(50, 30, 0, 0.8);
 }
 
 .buttons {
@@ -147,8 +163,8 @@ button {
   width: 100%;
   padding: 10px;
   font-size: 16px;
-
-  border: 1px solid black;
+  height: 5rem;
+  border: 1px solid rgba(50, 30, 0, 0.8);
   cursor: pointer;
 }
 
@@ -156,4 +172,111 @@ button {
 button:hover {
   background-color: #eee;
 }
+
+.main-page {
+  text-align: center;
+  padding: 50px;
+  color: white;
+  width: 80%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.special-buttons {
+  background-color: #ff9f0c;
+}
+.zero-button {
+  grid-column: span 2;
+}
+.dot-button {
+  font-size: 26px;
+}
+
+
+
+
+.dark-mode h4 {
+color: #cc0000;
+}
+
+.dark-mode button {
+  border: 1px solid rgba(0, 0, 0, 0.5);
+ 
+}
+
+.dark-mode .display {
+  background-color: rgba(0, 0, 0, 0.5);
+ 
+}
+
+.dark-mode .special-buttons {
+  background-color: #cc0000;
+ 
+}
+
+.theme-switch-div{
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+  
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ff9f0c;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  transition: .4s;
+}
+
+input:checked+.slider {
+  background-color: #cc0000;
+}
+
+input:checked+.slider:before {
+  transform: translateX(26px);
+}
+
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+@media screen and (max-width: 800px) {
+  .calculator{
+   width: 80%;
+  }
+}
+
 </style>
