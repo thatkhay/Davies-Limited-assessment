@@ -34,7 +34,7 @@ To run the calculator locally, follow these steps:
 
 Alternatively, you can deploy the calculator to a web hosting service to make it accessible online.
 
-### Note: This project utilizes Vue.js version 2.x for front-end development
+##### Note: This project utilizes Vue.js version 2.x for front-end development
 
 
 
