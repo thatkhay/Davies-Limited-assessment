@@ -167,6 +167,7 @@ button {
   border: 1px solid rgba(50, 30, 0, 0.8);
   cursor: pointer;
   background-color: rgba(132, 120, 102, 0.8);
+  color: white;
 }
 
 .sec-button{
