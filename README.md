@@ -9,8 +9,7 @@ This repository contains a simple calculator web application built using Vue.js.
 ### Vue.js
 Vue.js is a progressive JavaScript framework for building user interfaces. It's lightweight and efficient, making it suitable for single-page applications like this calculator. Vue.js provides features like data binding and components, which simplify the development process and enhance the maintainability of the code.
 
-### HTML & CSS
-HTML is used for the structure of the calculator, defining elements such as buttons and display screens. CSS is used for styling, including layout, colors, and animations. The application is responsive, ensuring a good user experience across different devices and screen sizes.
+
 
 ## Features
 
@@ -29,8 +28,9 @@ To run the calculator locally, follow these steps:
 
 1. Clone this repository to your local machine.
 2. Open the project directory in your code editor.
-3. Open the `index.html` file in a web browser.
-4. Start using the calculator!
+3. cd to hello-world
+4. run npm run serve
+5. Start using the calculator!
 
 Alternatively, you can deploy the calculator to a web hosting service to make it accessible online.
 
